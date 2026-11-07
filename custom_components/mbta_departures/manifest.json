@@ -1,11 +1,11 @@
 {
   "domain": "mbta_departures",
   "name": "MBTA Departures",
+  "categories": "vehicles_transport.public_transport",
   "codeowners": [
     "@N1OF"
   ],
   "config_flow": true,
-  "categories": ["vehicles_transport.public_transport"],
   "documentation": "https://github.com/N1OF/ha-mbta-departures",
   "integration_type": "service",
   "iot_class": "cloud_polling",
