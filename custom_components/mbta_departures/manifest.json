@@ -1,7 +1,7 @@
 {
   "domain": "mbta_departures",
   "name": "MBTA Departures",
-  "categories": "vehicles_transport.public_transport",
+  "categories": ["vehicles_transport.public_transport"],
   "codeowners": [
     "@N1OF"
   ],
