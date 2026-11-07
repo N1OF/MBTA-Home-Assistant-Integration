@@ -4,6 +4,9 @@ Live departure information for Boston **South Station** and **North Station**, w
 
 Community project by Scott Sheets. Not affiliated with or endorsed by the MBTA.
 
+<img width="1560" height="905" alt="image" src="https://github.com/user-attachments/assets/5d543e79-d16e-464a-b5d6-20958047e00e" />
+
+
 ## Features
 
 | Station | Services |
