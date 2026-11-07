@@ -1,0 +1,14 @@
+const fs=require('fs'),vm=require('vm'),assert=require('assert');
+global.HTMLElement=class {attachShadow(){this.shadowRoot={innerHTML:'',querySelector:()=>null};}};
+global.window={};global.customElements={get:()=>null,define:(n,c)=>global.Card=c};
+vm.runInThisContext(fs.readFileSync(require('path').join(__dirname,'../frontend/www/mbta-departure-board.js'),'utf8'));
+const c=new Card();c.setConfig({station:'South <Station>',services:[{name:'Rail',entity:'sensor.rail'}],alerts_entity:'sensor.alerts'});
+const now=Date.now();const row={trip_id:'1',route_id:'CR-Lowell',destination:'<img onerror=bad>',departure_time:new Date(now+600000).toISOString(),realtime:true};
+c.hass={states:{'sensor.rail':{state:'unknown',attributes:{updated_at:new Date(now).toISOString(),departures:[row,row]}},'sensor.alerts':{state:'1',attributes:{alerts:[{header:'Test',description:'<script>bad</script>'}]}}}};
+assert(c.shadowRoot.innerHTML.includes('&lt;img onerror=bad&gt;'));
+assert(!c.shadowRoot.innerHTML.includes('<script>bad'));
+assert.equal((c.shadowRoot.innerHTML.match(/class="departure"/g)||[]).length,1);
+assert(c.shadowRoot.innerHTML.includes('10<small> MIN'));
+c.hass={states:{}};assert(c.shadowRoot.innerHTML.includes('ENTITY NOT FOUND'));
+c.hass={states:{'sensor.rail':{state:'unavailable',attributes:{}}}};assert(c.shadowRoot.innerHTML.includes('DATA UNAVAILABLE'));
+console.log('PASS: safe escaping, exact deduplication, countdown, missing entity and unavailable rendering');

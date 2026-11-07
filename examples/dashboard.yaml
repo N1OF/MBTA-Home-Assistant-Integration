@@ -1,0 +1,116 @@
+title: MBTA Departures
+views:
+  - title: Departures
+    path: departures
+    icon: mdi:train
+    cards:
+      - type: markdown
+        title: South Station — Red Line
+        content: |-
+          {% set e = 'sensor.mbta_south_station_red' %}
+          {% if states(e) in ['unavailable', 'unknown'] %}
+          No upcoming departures or data unavailable.
+          {% else %}
+          | Destination | Departs | Track | Source |
+          | :--- | :--- | :--- | :--- |
+          {% for d in state_attr(e, 'departures') or [] %}
+          | {{ d.destination }} | {{ as_local(as_datetime(d.departure_time)).strftime('%I:%M %p') }} ({{ [0, ((as_timestamp(d.departure_time)-as_timestamp(now())) / 60) | round(0, 'ceil') | int] | max }} min) | {{ d.track or '—' }} | {{ 'Live' if d.realtime else 'Schedule' }} |
+          {% endfor %}
+          {% endif %}
+      - type: markdown
+        title: South Station — Silver Line
+        content: |-
+          {% set e = 'sensor.mbta_south_station_silver' %}
+          {% if states(e) in ['unavailable', 'unknown'] %}
+          No upcoming departures or data unavailable.
+          {% else %}
+          | Destination | Departs | Track | Source |
+          | :--- | :--- | :--- | :--- |
+          {% for d in state_attr(e, 'departures') or [] %}
+          | {{ d.destination }} | {{ as_local(as_datetime(d.departure_time)).strftime('%I:%M %p') }} ({{ [0, ((as_timestamp(d.departure_time)-as_timestamp(now())) / 60) | round(0, 'ceil') | int] | max }} min) | {{ d.track or '—' }} | {{ 'Live' if d.realtime else 'Schedule' }} |
+          {% endfor %}
+          {% endif %}
+      - type: markdown
+        title: South Station — Commuter Rail
+        content: |-
+          {% set e = 'sensor.mbta_south_station_rail' %}
+          {% if states(e) in ['unavailable', 'unknown'] %}
+          No upcoming departures or data unavailable.
+          {% else %}
+          | Destination | Departs | Track | Source |
+          | :--- | :--- | :--- | :--- |
+          {% for d in state_attr(e, 'departures') or [] %}
+          | {{ d.destination }} | {{ as_local(as_datetime(d.departure_time)).strftime('%I:%M %p') }} ({{ [0, ((as_timestamp(d.departure_time)-as_timestamp(now())) / 60) | round(0, 'ceil') | int] | max }} min) | {{ d.track or '—' }} | {{ 'Live' if d.realtime else 'Schedule' }} |
+          {% endfor %}
+          {% endif %}
+      - type: markdown
+        title: South Station — Service Alerts
+        content: |-
+          {% set e = 'sensor.mbta_south_station_alerts' %}
+          {% if states(e) in ['unknown', 'unavailable'] %}
+          Alert data unavailable.
+          {% else %}
+          {% for a in state_attr(e, 'alerts') or [] %}
+          **{{ a.header }}**
+
+          {{ a.description }}
+
+          {% else %}
+          No active alerts.
+          {% endfor %}
+          {% endif %}
+      - type: markdown
+        title: North Station — Orange Line
+        content: |-
+          {% set e = 'sensor.mbta_north_station_orange' %}
+          {% if states(e) in ['unavailable', 'unknown'] %}
+          No upcoming departures or data unavailable.
+          {% else %}
+          | Destination | Departs | Track | Source |
+          | :--- | :--- | :--- | :--- |
+          {% for d in state_attr(e, 'departures') or [] %}
+          | {{ d.destination }} | {{ as_local(as_datetime(d.departure_time)).strftime('%I:%M %p') }} ({{ [0, ((as_timestamp(d.departure_time)-as_timestamp(now())) / 60) | round(0, 'ceil') | int] | max }} min) | {{ d.track or '—' }} | {{ 'Live' if d.realtime else 'Schedule' }} |
+          {% endfor %}
+          {% endif %}
+      - type: markdown
+        title: North Station — Green Line
+        content: |-
+          {% set e = 'sensor.mbta_north_station_green' %}
+          {% if states(e) in ['unavailable', 'unknown'] %}
+          No upcoming departures or data unavailable.
+          {% else %}
+          | Destination | Departs | Track | Source |
+          | :--- | :--- | :--- | :--- |
+          {% for d in state_attr(e, 'departures') or [] %}
+          | {{ d.destination }} | {{ as_local(as_datetime(d.departure_time)).strftime('%I:%M %p') }} ({{ [0, ((as_timestamp(d.departure_time)-as_timestamp(now())) / 60) | round(0, 'ceil') | int] | max }} min) | {{ d.track or '—' }} | {{ 'Live' if d.realtime else 'Schedule' }} |
+          {% endfor %}
+          {% endif %}
+      - type: markdown
+        title: North Station — Commuter Rail
+        content: |-
+          {% set e = 'sensor.mbta_north_station_rail' %}
+          {% if states(e) in ['unavailable', 'unknown'] %}
+          No upcoming departures or data unavailable.
+          {% else %}
+          | Destination | Departs | Track | Source |
+          | :--- | :--- | :--- | :--- |
+          {% for d in state_attr(e, 'departures') or [] %}
+          | {{ d.destination }} | {{ as_local(as_datetime(d.departure_time)).strftime('%I:%M %p') }} ({{ [0, ((as_timestamp(d.departure_time)-as_timestamp(now())) / 60) | round(0, 'ceil') | int] | max }} min) | {{ d.track or '—' }} | {{ 'Live' if d.realtime else 'Schedule' }} |
+          {% endfor %}
+          {% endif %}
+      - type: markdown
+        title: North Station — Service Alerts
+        content: |-
+          {% set e = 'sensor.mbta_north_station_alerts' %}
+          {% if states(e) in ['unknown', 'unavailable'] %}
+          Alert data unavailable.
+          {% else %}
+          {% for a in state_attr(e, 'alerts') or [] %}
+          **{{ a.header }}**
+
+          {{ a.description }}
+
+          {% else %}
+          No active alerts.
+          {% endfor %}
+          {% endif %}

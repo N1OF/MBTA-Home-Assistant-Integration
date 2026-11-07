@@ -1,0 +1,31 @@
+{
+  "title": "MBTA Departures",
+  "config": {
+    "step": {
+      "user": {
+        "title": "MBTA Departures",
+        "description": "Select Boston terminals. A free MBTA API key is recommended.",
+        "data": {
+          "api_key": "MBTA API key (optional)",
+          "stations": "Stations",
+          "scan_interval": "Update interval (seconds)"
+        }
+      },
+      "reauth_confirm": {
+        "title": "Update MBTA API key",
+        "data": {
+          "api_key": "API key"
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "MBTA rejected this API key.",
+      "cannot_connect": "Unable to connect to MBTA. Try again later.",
+      "no_stations": "Select at least one station."
+    },
+    "abort": {
+      "already_configured": "MBTA Departures is already configured.",
+      "reauth_successful": "API key updated."
+    }
+  }
+}

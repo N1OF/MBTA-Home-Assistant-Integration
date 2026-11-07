@@ -1,0 +1,36 @@
+title: MBTA Departures
+views:
+  - title: Departures
+    path: departures
+    icon: mdi:train
+    cards:
+      - type: custom:mbta-departure-board
+        station: South Station
+        rows: 5
+        time_zone: America/New_York
+        services:
+          - name: Red Line
+            entity: sensor.mbta_south_station_red
+            color: '#DA291C'
+          - name: Silver Line
+            entity: sensor.mbta_south_station_silver
+            color: '#A2AAAD'
+          - name: Commuter Rail
+            entity: sensor.mbta_south_station_rail
+            color: '#80276C'
+        alerts_entity: sensor.mbta_south_station_alerts
+      - type: custom:mbta-departure-board
+        station: North Station
+        rows: 5
+        time_zone: America/New_York
+        services:
+          - name: Orange Line
+            entity: sensor.mbta_north_station_orange
+            color: '#ED8B00'
+          - name: Green Line
+            entity: sensor.mbta_north_station_green
+            color: '#00843D'
+          - name: Commuter Rail
+            entity: sensor.mbta_north_station_rail
+            color: '#80276C'
+        alerts_entity: sensor.mbta_north_station_alerts
